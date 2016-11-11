@@ -1,2 +1,2 @@
 # TestKittUI
-TestKitt UI Application
+TestKitt UI Application for creating tests
