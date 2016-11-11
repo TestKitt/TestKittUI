@@ -1,2 +1,2 @@
 # TestKittUI
-TestKitt UI Application for creating tests
+TestKitt React based UI Application for creating tests
