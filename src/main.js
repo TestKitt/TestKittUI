@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+import './styles/core.scss'
+import 'react-toolbox/lib/commons.scss';
 
 // ========================================================
 // Store Instantiation

@@ -1,18 +1,16 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
-import './Header.scss'
+import style from './Header.scss'
+import AppBar from 'react-toolbox/lib/app_bar';
+import Navigation from '../Navigation';
 
 export const Header = () => (
-  <div>
-    <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName='route--active'>
-      Home
-    </IndexLink>
-    {' · '}
-    <Link to='/counter' activeClassName='route--active'>
-      Counter
-    </Link>
-  </div>
+    <div>
+        <AppBar raised>
+            <a className={style.logo} href="/"><img src="http://www.reactrally.com/assets/dist/img/ReactLogo.svg"/></a>
+            <Navigation className='nav'/>
+        </AppBar>
+    </div>
 )
 
 export default Header

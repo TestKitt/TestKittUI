@@ -17,7 +17,7 @@ const webpackConfig = {
   devtool : config.compiler_devtool,
   resolve : {
     root       : paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    extensions : ['', '.js', '.jsx', '.json',  '.scss']
   },
   module : {}
 }
@@ -136,7 +136,7 @@ const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
 
 webpackConfig.module.loaders.push({
   test    : /\.scss$/,
-  exclude : null,
+  include: paths.client('styles'),
   loaders : [
     'style',
     BASE_CSS_LOADER,
@@ -144,13 +144,18 @@ webpackConfig.module.loaders.push({
     'sass?sourceMap'
   ]
 })
+
+
+// CSS MODULES SASS
+const CSS_MODULE_LOADER = 'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
 webpackConfig.module.loaders.push({
-  test    : /\.css$/,
-  exclude : null,
+  test    : /\.scss$/,
+  exclude: paths.client('styles'),
   loaders : [
     'style',
-    BASE_CSS_LOADER,
-    'postcss'
+    CSS_MODULE_LOADER,
+    'postcss',
+    'sass?sourceMap'
   ]
 })
 
