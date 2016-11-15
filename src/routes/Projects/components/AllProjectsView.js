@@ -1,14 +1,15 @@
 import React from 'react'
-import './AllProjectsView.scss'
-import { Button } from 'react-toolbox';
-import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import { Link as RouterLink } from 'react-router'
 import Input from 'react-toolbox/lib/input';
+import { Button } from 'react-toolbox/lib/button';
 import ProjectList from './ProjectList'
+import style from './AllProjectsView.scss'
+import CreateProjectForm from '../containers/CreateProjectContainer'
 
 export const AllProjectsView = () => (
   <div className="container">
-      <Input type='search' label='Search Projects' icon='search' />
       <ProjectList/>
+      <CreateProjectForm/>
   </div>
 )
 

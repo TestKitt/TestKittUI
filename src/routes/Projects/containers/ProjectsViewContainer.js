@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ProjectsView from '../components/ProjectsView'
+import AllProjectsView from '../components/AllProjectsView'
 
 
 const mapDispatchToProps = {
@@ -11,4 +11,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsView)
+export default connect(mapStateToProps, mapDispatchToProps)(AllProjectsView)

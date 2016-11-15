@@ -1,0 +1,15 @@
+.sidebar{
+  width: 100%;
+  @media(min-width: 992px){
+    width: 25%;
+    height: 100%;
+    position: fixed;
+    padding-top: 70px;
+    top: 0;
+    left:0;
+    border-right: 1px solid lightgray;
+    overflow: scroll;
+    float:left;
+    z-index: 0;
+  }
+}

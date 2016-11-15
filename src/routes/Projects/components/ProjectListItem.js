@@ -1,27 +1,20 @@
 import React from 'react'
-import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
-import { Button } from 'react-toolbox';
+import { Link as RouterLink } from 'react-router'
+import { ListItem, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
 import style from './ProjectListItem.scss'
-import {IconMenu, MenuItem, MenuDivider } from 'react-toolbox/lib/menu';
+import image from '../assets/reed-logo.png'
 
 export const ProjectListItem = () => (
+
   <div>
-      <List selectable ripple>
-          <ListSubHeader caption='Your Projects' />
+      <RouterLink to="projects/1" >
           <ListItem
-              avatar='https://dl.dropboxusercontent.com/u/2247264/assets/m.jpg'
+              avatar={image}
               caption='Reed.co.uk Frontend'
               legend={<span>Last Run: <span className="text-success">Pass</span></span>}
-              rightActions={
-              [
-                <MenuItem value='download' icon='remove_red_eye' caption='View' />,
-                <MenuItem className="text-red" value='download' icon='get_app' caption='Download' />
-               ]
-              }
               className={`${style.project} ${style.success}`}
-              to="/"
           />
-      </List>
+      </RouterLink>
   </div>
 )
 

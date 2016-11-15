@@ -1,0 +1,17 @@
+@import "~react-toolbox/lib/colors";
+
+.test-case{
+  border-bottom: 1px solid #f3f3f3;
+  &:first-child{
+    border-top: 1px solid #f3f3f3;
+  }
+  &.success{
+    border-left: 6px solid $palette-green-500;
+  }
+  &.pending{
+    border-left: 6px solid $palette-yellow-500;
+  }
+  &.fail{
+    border-left: 6px solid $palette-red-500;
+  }
+}

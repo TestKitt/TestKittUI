@@ -1,7 +1,7 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
-import Projects from './Projects'
-import CounterRoute from './Counter'
+import ProjectsRoute from './Projects'
+import SettingsRoute from './Settings'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -9,9 +9,10 @@ import CounterRoute from './Counter'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : Projects,
+  indexRoute  : { onEnter: (nextState, replace) => replace('projects')},
   childRoutes : [
-    CounterRoute(store)
+    ProjectsRoute(store),
+    SettingsRoute(store)
   ]
 })
 
