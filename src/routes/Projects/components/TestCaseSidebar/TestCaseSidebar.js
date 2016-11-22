@@ -1,12 +1,12 @@
 import React from 'react'
-import TestCaseList from './TestCaseList'
-import AddNewTestCaseButton from './AddNewTestCaseButton'
+import { TestCaseList } from '../TestCaseList'
+import { Button } from 'react-toolbox/lib/button'
 import style from './TestCaseSidebar.scss'
 
 export const TestCaseSidebar = () => (
   <aside className={style.sidebar} >
     <TestCaseList />
-    <AddNewTestCaseButton />
+    <Button className={style.button} icon="add" label="Add New Test Case" flat primary />
   </aside>
 )
 

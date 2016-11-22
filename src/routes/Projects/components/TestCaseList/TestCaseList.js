@@ -6,7 +6,6 @@ export const TestCaseList = () => (
   <List selectable ripple>
     <ListSubHeader caption="Test Cases" />
     <TestCaseListItem />
-    <TestCaseListItem />
   </List>
 )
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import ProjectList from './ProjectList'
-import CreateProjectForm from '../forms/CreateProjectForm'
+import { ProjectList } from '../ProjectList'
+import CreateProjectForm from '../../forms/CreateProjectForm'
 
 export const AllProjectsView = () => (
   <div className="container">
