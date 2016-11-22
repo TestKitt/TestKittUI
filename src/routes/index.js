@@ -9,7 +9,7 @@ import SettingsRoute from './Settings'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : { onEnter: (nextState, replace) => replace('projects')},
+  indexRoute  : { onEnter: (nextState, replace) => replace('projects') },
   childRoutes : [
     ProjectsRoute(store),
     SettingsRoute(store)

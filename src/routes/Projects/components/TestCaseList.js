@@ -1,12 +1,13 @@
 import React from 'react'
-import TestCaseListItem from './TestCaseListItem';
-import { List, ListSubHeader } from 'react-toolbox/lib/list';
+import TestCaseListItem from './TestCaseListItem'
+import { List, ListSubHeader } from 'react-toolbox/lib/list'
 
 export const TestCaseList = () => (
-    <List selectable ripple>
-        <ListSubHeader caption='Test Cases' />
-        <TestCaseListItem/>
-    </List>
+  <List selectable ripple>
+    <ListSubHeader caption="Test Cases" />
+    <TestCaseListItem />
+    <TestCaseListItem />
+  </List>
 )
 
 export default TestCaseList

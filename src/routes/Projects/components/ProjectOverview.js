@@ -4,8 +4,8 @@ import TestCaseView from './TestCaseView'
 
 export const ProjectOverview = () => (
   <div>
-    <TestCaseView/>
-    <TestCaseSidebar/>
+    <TestCaseView />
+    <TestCaseSidebar />
   </div>
 )
 

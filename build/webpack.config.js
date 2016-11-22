@@ -17,9 +17,13 @@ const webpackConfig = {
   devtool : config.compiler_devtool,
   resolve : {
     root       : paths.client(),
-    extensions : ['', '.js', '.jsx', '.json',  '.scss']
+    extensions : ['', '.js', '.jsx', '.json', '.scss']
   },
-  module : {}
+  module : {},
+  eslint: {
+    configFile: '../.eslintrc',
+    fix: true
+  }
 }
 // ------------------------------------
 // Entry Points
@@ -145,9 +149,9 @@ webpackConfig.module.loaders.push({
   ]
 })
 
-
 // CSS MODULES SASS
-const CSS_MODULE_LOADER = 'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+const CSS_MODULE_LOADER = 'css?sourceMap&-minimize&modules&importLoaders=1' +
+    '&localIdentName=[name]__[local]___[hash:base64:5]'
 webpackConfig.module.loaders.push({
   test    : /\.scss$/,
   exclude: paths.client('styles'),
