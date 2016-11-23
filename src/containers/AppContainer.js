@@ -25,8 +25,4 @@ class AppContainer extends Component {
   }
 }
 
-AppContainer.propTypes = {
-
-}
-
 export default AppContainer

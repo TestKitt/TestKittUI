@@ -5,6 +5,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
+  projects: state.projects.projectsById
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProjectsView)

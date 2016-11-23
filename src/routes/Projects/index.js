@@ -1,3 +1,5 @@
+import { injectReducer } from '../../store/reducers'
+
 /* Sync route definition
 export default (store) => ({
   path : 'projects',
@@ -22,6 +24,10 @@ export default (store) => ({
 
   getIndexRoute (partialNextState, callback) {
     require.ensure([], function (require) {
+      /*  Add the reducer to the store on key 'projects'  */
+      const reducer = require('./modules/projects').default
+      injectReducer(store, { key: 'projects', reducer })
+
       callback(null, {
         component: require('./containers/ProjectsViewContainer').default
       })

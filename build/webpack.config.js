@@ -21,7 +21,7 @@ const webpackConfig = {
   },
   module : {},
   eslint: {
-    configFile: '../.eslintrc',
+    configFile: '.eslintrc',
     fix: true
   }
 }
@@ -197,6 +197,11 @@ webpackConfig.module.loaders.push(
   { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
 )
 /* eslint-enable */
+
+// ESLint loaders
+webpackConfig.module.loaders.push([
+  {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
+])
 
 // ------------------------------------
 // Finalize Configuration

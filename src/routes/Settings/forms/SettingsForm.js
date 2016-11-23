@@ -8,6 +8,7 @@ export const SettingsForm = () => (
   <form className={style['create-form']}>
     <PageTitle text="Create a New Project" />
     <Input name="name" type="text" label="Give your new project a unique name" required />
+    <Input name="imageUrl" type="text" label="Provide a URL for the project image" required />
     <div className="text-right">
       <Button label="Add Project" icon="add" raised primary />
     </div>
