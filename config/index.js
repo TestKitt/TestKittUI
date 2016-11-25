@@ -54,6 +54,11 @@ const config = {
   // ----------------------------------
   // Test Configuration
   // ----------------------------------
+  mongo_host: 'mongodb://localhost/test',
+
+  // ----------------------------------
+  // Test Configuration
+  // ----------------------------------
   coverage_reporters : [
     { type : 'text-summary' },
     { type : 'lcov', dir : 'coverage' }

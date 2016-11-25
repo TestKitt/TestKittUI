@@ -4,7 +4,7 @@ import style from './InterstitialMessage.scss'
 export const InterstitialMessage = (props) => (
   <div className={`${style.interstitial} text-center`} >
     <img src={props.image} />
-    <h4>{props.message}</h4>
+    <h5>{props.message}</h5>
   </div>
 )
 

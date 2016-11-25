@@ -2,6 +2,8 @@
 // Constants
 // ------------------------------------
 export const LOAD_ALL_PROJECTS_REQUEST = 'LOAD_ALL_PROJECTS_REQUEST'
+export const SHOW_ADD_PROJECTS = 'SHOW_ADD_PROJECTS'
+export const CLOSE_ADD_PROJECTS = 'CLOSE_ADD_PROJECTS'
 
 // ------------------------------------
 // Actions
@@ -9,6 +11,16 @@ export const LOAD_ALL_PROJECTS_REQUEST = 'LOAD_ALL_PROJECTS_REQUEST'
 export function loadAllProjects () {
   return {
     type    : LOAD_ALL_PROJECTS_REQUEST
+  }
+}
+export function closeAddProjectForm () {
+  return {
+    type    : CLOSE_ADD_PROJECTS
+  }
+}
+export function showAddProjectForm () {
+  return {
+    type    : SHOW_ADD_PROJECTS
   }
 }
 
@@ -33,6 +45,8 @@ export const doubleAsync = () => {
 
 export const actions = {
   loadAllProjects,
+  closeAddProjectForm,
+  showAddProjectForm,
   doubleAsync
 }
 
@@ -40,13 +54,15 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [LOAD_ALL_PROJECTS_REQUEST] : (state, action) => state + action.payload
+  [LOAD_ALL_PROJECTS_REQUEST] : (state, action) => state + action.payload,
+  [SHOW_ADD_PROJECTS] : (state, action) => { return { ...state, isAddProjectFormShown: true } },
+  [CLOSE_ADD_PROJECTS] : (state, action) => { return { ...state, isAddProjectFormShown: false } }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {}
+const initialState = { isAddProjectFormShown: false }
 export default function projectsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
