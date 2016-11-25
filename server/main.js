@@ -7,6 +7,10 @@ const config = require('../config')
 const app = express()
 const paths = config.utils_paths
 
+// Load routes before setting the fallback for the frontend app
+const router = require('./routes')
+router(app)
+
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement universal
 // rendering, you'll want to remove this middleware.

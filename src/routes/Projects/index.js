@@ -1,4 +1,5 @@
 import { injectReducer } from '../../store/reducers'
+import { fetchProjects } from './modules/projects'
 
 /* Sync route definition
 export default (store) => ({
@@ -32,5 +33,9 @@ export default (store) => ({
         component: require('./containers/ProjectsViewContainer').default
       })
     }, 'projects')
+  },
+
+  onEnter (nextState, replace) {
+    store.dispatch(fetchProjects())
   }
 })
