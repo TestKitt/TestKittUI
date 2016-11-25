@@ -18,6 +18,7 @@ export default {
     return new Promise((resolve, reject) => {
       request
         .post(url)
+        .set('Accept', 'application/json')
         .send(payload)
         .end(function (err, res) {
           if (err || !res.ok) {

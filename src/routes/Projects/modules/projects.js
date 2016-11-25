@@ -20,7 +20,7 @@ export const fetchProjects = () => {
     dispatch(loadAllProjectsRequest())
     return API.get('/api/projects')
       .then((data) => {
-        dispatch(loadProjectsSuccess(data))
+        dispatch(loadProjectsSuccess(data.data))
       })
       .catch(() => {
         dispatch(loadProjectsError())
@@ -28,14 +28,15 @@ export const fetchProjects = () => {
   }
 }
 
-export const createProject = () => {
+export const createProject = (values) => {
   return (dispatch, getState) => {
     dispatch(createProjectRequest())
-    return API.post('/api/projects')
+    return API.post('/api/projects', values)
       .then((data) => {
         dispatch(createProjectSuccess(data))
       })
       .catch((err, res) => {
+        console.log(err)
         dispatch(createProjectError(err))
       })
   }
@@ -108,7 +109,7 @@ const ACTION_HANDLERS = {
   [LOAD_ALL_PROJECTS_SUCCESS] : (state, action) => {
     return {
       ...state,
-      projects: action.data,
+      projects: action.projects,
       fetching: false
     }
   },
@@ -116,7 +117,7 @@ const ACTION_HANDLERS = {
   [CREATE_PROJECT_SUCCESS] : (state, action) => {
     return {
       ...state,
-      // projects: state.projects.concat(action.data),
+      projects: state.projects.concat(action.data),
       creating: false
     }
   },

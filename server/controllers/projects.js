@@ -1,8 +1,9 @@
 exports.getAll = (req, res) => {
-  res.send([])
+  res.send({data: []})
 };
 
 exports.create = (req, res) => {
+  console.log(req.body)
   res.send({id: 1234})
 };
 
