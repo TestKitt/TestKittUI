@@ -11,7 +11,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  projects: state.projects.projectsById,
+  projects: state.projects.projects,
   isAddProjectFormShown: state.projects.isAddProjectFormShown,
   fetching: state.projects.fetching,
   creating: state.projects.creating

@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link as RouterLink } from 'react-router'
 import { ListItem } from 'react-toolbox/lib/list'
 import style from './ProjectListItem.scss'
-import image from '../../assets/reed-logo.png'
 
-export const ProjectListItem = () => (
-  <RouterLink to="projects/1" >
-    <ListItem
-      avatar={image}
-      caption="Reed.co.uk Frontend"
-      legend={<span>Last Run: <span className="text-success">Pass</span></span>}
-      className={`${style.project} ${style.success}`}
-    />
-  </RouterLink>
-)
+let ProjectListItem = (props) => {
+  const { name, imageUrl, lastRunResult, id } = props
+
+  return (
+    <RouterLink to={`projects/${id}`}>
+      <ListItem
+        avatar={imageUrl}
+        caption={name}
+        legend={`Last Run: ${lastRunResult || 'No data'}`}
+        className={`${style.project} ${style.success}`}
+      />
+    </RouterLink>
+  )
+}
+
+ProjectListItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  lastRunResult: PropTypes.string
+}
 
 export default ProjectListItem

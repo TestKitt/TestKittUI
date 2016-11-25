@@ -16,6 +16,7 @@ try{
   mongoose.connection.once('open', function() {
     debug(`Successfully connected to Mongo running at ${mongo_host} ${chalk.green(' ✓')}`)
   });
+  mongoose.Promise = global.Promise;
 
   server.listen(port)
   debug(`Server is now running at http://localhost:${port}. ${chalk.green(' ✓')}`)

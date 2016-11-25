@@ -8,7 +8,7 @@ let CreateProjectForm = (props) => (
     <Field name="name" label="Project Name" component={TextBox} type="text" required />
     <Field name="description" multiline floating rows={3} label="Project Description"
       component={TextBox} type="text" required />
-    <Field name="imageUrl" label="Project Image URL" required component={TextBox} type="text" />
+    <Field name="image_url" label="Project Image URL" required component={TextBox} type="text" />
   </form>
 )
 

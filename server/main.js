@@ -4,15 +4,16 @@ const webpack = require('webpack')
 const webpackConfig = require('../build/webpack.config')
 const config = require('../config')
 const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
 
 const app = express()
 const paths = config.utils_paths
 app.use(bodyParser.json())
+app.use(expressValidator())
 
 // Load routes before setting the fallback for the frontend app
 const router = require('./routes')
 router(app)
-
 
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement universal

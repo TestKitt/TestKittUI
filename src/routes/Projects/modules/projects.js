@@ -34,9 +34,9 @@ export const createProject = (values) => {
     return API.post('/api/projects', values)
       .then((data) => {
         dispatch(createProjectSuccess(data))
+        dispatch(closeAddProjectForm())
       })
-      .catch((err, res) => {
-        console.log(err)
+      .catch((err) => {
         dispatch(createProjectError(err))
       })
   }
@@ -117,7 +117,7 @@ const ACTION_HANDLERS = {
   [CREATE_PROJECT_SUCCESS] : (state, action) => {
     return {
       ...state,
-      projects: state.projects.concat(action.data),
+      projects: state.projects.concat(action.project),
       creating: false
     }
   },
