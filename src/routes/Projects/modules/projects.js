@@ -1,4 +1,5 @@
 const API = require('../../../utils/API').default
+import { SubmissionError } from 'redux-form'
 
 // ------------------------------------
 // Constants
@@ -21,9 +22,8 @@ export const fetchProjects = () => {
     return API.get('/api/projects')
       .then((data) => {
         dispatch(loadProjectsSuccess(data.data))
-      })
-      .catch(() => {
-        dispatch(loadProjectsError())
+      }, (err) => {
+        dispatch(loadProjectsError(err))
       })
   }
 }
@@ -35,9 +35,9 @@ export const createProject = (values) => {
       .then((data) => {
         dispatch(createProjectSuccess(data))
         dispatch(closeAddProjectForm())
-      })
-      .catch((err) => {
+      }, (err) => {
         dispatch(createProjectError(err))
+        throw new SubmissionError(err)
       })
   }
 }

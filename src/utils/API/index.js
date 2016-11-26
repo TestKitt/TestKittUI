@@ -22,7 +22,7 @@ export default {
         .send(payload)
         .end(function (err, res) {
           if (err || !res.ok) {
-            reject()
+            reject(res.body)
           } else {
             resolve(res.body)
           }

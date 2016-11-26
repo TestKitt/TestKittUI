@@ -13,22 +13,26 @@ exports.create = (req, res) => {
 
   req.getValidationResult().then((result) => {
     if (!result.isEmpty()) {
-      res.status(400).send('There have been validation errors: ' + util.inspect(result.array()))
+      let errors = result.mapped()
+      Object.keys(errors).forEach((key) => {
+        errors[key] = errors[key].msg
+      })
+      res.status(400).json(errors)
+    } else {
+      let project = new Project({
+        name: req.body.name,
+        description: req.body.description,
+        image_url: req.body.image_url
+      })
+
+      // Save the object
+      project.save().then((data) => {
+        res.json(data)
+      }).catch((err) => {
+        console.log(err)
+        res.status(400).send('There was an error saving the project')
+      })
     }
-
-    let project = new Project({
-      name: req.body.name,
-      description: req.body.description,
-      image_url: req.body.image_url
-    })
-
-    // Save the object
-    project.save().then((data) => {
-      res.json(data)
-    }).catch((err) => {
-      console.log(err)
-      res.status(400).send('There was an error saving the project')
-    })
   });
 };
 

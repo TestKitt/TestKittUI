@@ -12,9 +12,33 @@ let CreateProjectForm = (props) => (
   </form>
 )
 
+const validate = values => {
+  const errors = {}
+
+  if (!values.name) {
+    errors.name = 'Required'
+  } else if (values.name.length > 40) {
+    errors.name = 'Must be 40 characters or less'
+  }
+  if (!values.description) {
+    errors.description = 'Required'
+  } else if (values.description.length > 40) {
+    errors.description = 'Must be 40 characters or less'
+  }
+  if (!values.image_url) {
+    errors.image_url = 'Required'
+  } else if (values.image_url.length > 300) {
+    errors.image_url = 'Must be 300 characters or less'
+  } else if (!/^(f|ht)tps?:\/\//i.test(values.image_url)) {
+    errors.image_url = 'Must start with http:// or https://'
+  }
+  return errors
+}
+
 // Decorate the form component
 CreateProjectForm = reduxForm({
-  form: 'createProject' // a unique name for this form
+  form: 'createProject',
+  validate
 })(CreateProjectForm)
 
 CreateProjectForm.propTypes = {
