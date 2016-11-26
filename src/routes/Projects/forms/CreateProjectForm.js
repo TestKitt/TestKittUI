@@ -22,13 +22,13 @@ const validate = values => {
   }
   if (!values.description) {
     errors.description = 'Required'
-  } else if (values.description.length > 40) {
-    errors.description = 'Must be 40 characters or less'
+  } else if (values.description.length > 350) {
+    errors.description = 'Must be 350 characters or less'
   }
   if (!values.image_url) {
     errors.image_url = 'Required'
-  } else if (values.image_url.length > 300) {
-    errors.image_url = 'Must be 300 characters or less'
+  } else if (values.image_url.length > 350) {
+    errors.image_url = 'Must be 350 characters or less'
   } else if (!/^(f|ht)tps?:\/\//i.test(values.image_url)) {
     errors.image_url = 'Must start with http:// or https://'
   }
