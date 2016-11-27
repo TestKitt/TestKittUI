@@ -1,9 +1,8 @@
 const Project = require('../models/Project')
-const util = require('util')
 
 exports.getAll = (req, res) => {
-  Project.find().exec().then((err, result) => res.send({data: err}))
-};
+  Project.find().exec().then((err, result) => res.send({ data: err }))
+}
 
 exports.create = (req, res) => {
   // Validate the request
@@ -33,13 +32,13 @@ exports.create = (req, res) => {
         res.status(400).send('There was an error saving the project')
       })
     }
-  });
-};
+  })
+}
 
 exports.update = (req, res) => {
   res.send(req.query)
-};
+}
 
 exports.delete = (req, res) => {
   res.send(req.query)
-};
+}

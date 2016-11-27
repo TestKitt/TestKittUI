@@ -15,4 +15,7 @@
   &.fail{
     border-left: 6px solid $palette-red-500;
   }
+  &.no-data{
+    border-left: 6px solid lightgray;
+  }
 }

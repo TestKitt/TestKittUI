@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react'
 import style from './TestCaseView.scss'
 import { Tab, Tabs } from 'react-toolbox/lib/tabs'
-import PageTitle from '../../../../components/PageTitle'
 import Canvas from '../../containers/CanvasContainer'
 import DataManager from '../../containers/DataManagerContainer'
 import TestCaseForm from '../../forms/TestCaseForm'
 
 export const TestCaseView = (props) => (
   <div className={style['test-case']} >
-    <PageTitle text={`${props.id} ${props.name}`} />
+    <h5>{props.id} {props.name}</h5>
     <Tabs>
       <Tab label="Details">
         <TestCaseForm />

@@ -1,17 +1,17 @@
-import CounterRoute from 'routes/Counter'
+import ProjectsRoute from 'routes/Projects'
 
-describe('(Route) Counter', () => {
+describe('(Route) Projects', () => {
   let _route
 
   beforeEach(() => {
-    _route = CounterRoute({})
+    _route = ProjectsRoute({})
   })
 
   it('Should return a route configuration object', () => {
     expect(typeof _route).to.equal('object')
   })
 
-  it('Configuration should contain path `counter`', () => {
+  it('Configuration should contain path `projects`', () => {
     expect(_route.path).to.equal('counter')
   })
 })

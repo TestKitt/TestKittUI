@@ -5,18 +5,18 @@ const error = require('debug')('app:error')
 const mongoose = require('mongoose')
 const chalk = require('chalk')
 const port = config.server_port
-const mongo_host = config.mongo_host
+const mongoHost = config.mongo_host
 
-try{
-  mongoose.connect(mongo_host);
+try {
+  mongoose.connect(mongoHost)
   mongoose.connection.on('error', () => {
-    error(`Unable to connect to Mongo running at ${mongo_host} App will now exit ${chalk.red('✗')}`)
-    process.exit();
-  });
-  mongoose.connection.once('open', function() {
-    debug(`Successfully connected to Mongo running at ${mongo_host} ${chalk.green(' ✓')}`)
-  });
-  mongoose.Promise = global.Promise;
+    error(`Unable to connect to Mongo running at ${mongoHost} App will now exit ${chalk.red('✗')}`)
+    process.exit()
+  })
+  mongoose.connection.once('open', function () {
+    debug(`Successfully connected to Mongo running at ${mongoHost} ${chalk.green(' ✓')}`)
+  })
+  mongoose.Promise = global.Promise
 
   server.listen(port)
   debug(`Server is now running at http://localhost:${port}. ${chalk.green(' ✓')}`)
