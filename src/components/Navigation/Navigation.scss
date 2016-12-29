@@ -22,7 +22,7 @@
         @media screen and (max-width: 480px) and (orientation: portrait) {
           padding: 19px 10px;
         }
-        &.route-active {
+        &.route_active {
           background-color: lighten($color-primary, 5%);
           &:after{
             position: absolute;

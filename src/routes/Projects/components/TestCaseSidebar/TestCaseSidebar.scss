@@ -1,24 +1,26 @@
 .sidebar{
   width: 100%;
   padding-bottom: 35px;
-  @media(min-width: 992px){
-    width: 25%;
-    height: 100%;
-    position: fixed;
-    padding-top: 70px;
-    top: 0;
-    left:0;
-    border-right: 1px solid lightgray;
-    overflow-y: scroll;
-    float:left;
-    z-index: 0;
+  text-align: center;
+  &:not(.full_width){
+    @media(min-width: 992px){
+      width: 25%;
+      height: 100%;
+      position: fixed;
+      padding-top: 70px;
+      top: 0;
+      left:0;
+      border-right: 1px solid lightgray;
+      overflow-y: scroll;
+      float:left;
+      z-index: 0;
+    }
+    .button{
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      left: 0;
+    }
   }
-}
-
-.button{
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-  left: 0;
 }

@@ -4,7 +4,7 @@ import Button from 'react-toolbox/lib/button'
 import style from './TestCaseForm.scss'
 
 export const TestCaseForm = () => (
-  <form className={style['test-case-form']}>
+  <form className={style.test_case_form}>
     <Input name="id" type="text" label="Test Case ID" value="TC02" required disabled />
     <Input name="name" type="text" label="Test Case Name" required />
     <Input name="description" type="text" multiline floating rows={3} label="Test Case Description" required />

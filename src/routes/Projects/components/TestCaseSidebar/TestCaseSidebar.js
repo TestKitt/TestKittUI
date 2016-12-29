@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { TestCaseList } from '../TestCaseList'
-import InterstitialMessage from '../../../../components/InterstitialMessage'
+import InterstitialMessage from 'components/InterstitialMessage'
 import { Button } from 'react-toolbox/lib/button'
 import style from './TestCaseSidebar.scss'
 
 export const TestCaseSidebar = (props) => (
-  <aside className={style.sidebar} >
+  <aside className={`${style.sidebar} ${props.fullWidth ? style.full_width : null}`} >
     {
       props.testCases.length > 0 && <TestCaseList />
     }
@@ -22,11 +22,13 @@ export const TestCaseSidebar = (props) => (
 )
 
 TestCaseSidebar.propTypes = {
-  testCases: PropTypes.array.isRequired
+  testCases: PropTypes.array.isRequired,
+  fullWidth: PropTypes.bool.isRequired
 }
 
 TestCaseSidebar.defaultProps = {
-  testCases: []
+  testCases: [],
+  fullWidth: false
 }
 
 export default TestCaseSidebar

@@ -1,0 +1,14 @@
+.subheader{
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 4.8rem;
+  color: #757575;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  letter-spacing: .02em;
+  &.large{
+    font-size: 2.4rem;
+  }
+  &.small{
+    font-size: 1.4rem;
+  }
+}

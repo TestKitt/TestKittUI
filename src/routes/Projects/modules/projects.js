@@ -1,4 +1,4 @@
-const API = require('../../../utils/API').default
+const API = require('utils/API').default
 import { SubmissionError } from 'redux-form'
 
 // ------------------------------------

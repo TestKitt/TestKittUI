@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { ProjectList } from '../ProjectList'
 import CreateProjectForm from '../../forms/CreateProjectForm'
-import InterstitialMessage from '../../../../components/InterstitialMessage'
-import LoadingMessage from '../../../../components/LoadingMessage'
+import InterstitialMessage from 'components/InterstitialMessage'
+import LoadingMessage from 'components/LoadingMessage'
 import { Button } from 'react-toolbox/lib/button'
 import Dialog from 'react-toolbox/lib/dialog'
 

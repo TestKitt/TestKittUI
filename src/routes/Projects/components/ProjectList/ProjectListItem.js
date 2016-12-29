@@ -12,7 +12,7 @@ let ProjectListItem = (props) => {
         avatar={imageUrl}
         caption={name}
         legend={`Last Run: ${lastRunResult || 'No data'}`}
-        className={`${style.project} ${lastRunResult ? style[lastRunResult] : style['no-data']}`}
+        className={`${style.project} ${lastRunResult ? style[lastRunResult] : style.no_data}`}
       />
     </RouterLink>
   )

@@ -8,7 +8,7 @@ export const TestCaseListItem = (props) => {
     <ListItem
       caption={`${id} ${name}`}
       legend={`${lastRunResult || 'No data'}`}
-      className={`${style['test-case']} ${style.success}`}
+      className={`${style.test_case} ${style.success}`}
     />
   )
 }

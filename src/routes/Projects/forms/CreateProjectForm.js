@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import style from './CreateProjectForm.scss'
-import { TextBox } from '../../../components/Form'
+import { TextBox } from 'components/Form'
 
 let CreateProjectForm = (props) => (
-  <form onSubmit={props.handleSubmit} className={style['create-form']}>
+  <form onSubmit={props.handleSubmit} className={style.create_form}>
     <Field name="name" label="Project Name" component={TextBox} type="text" required />
     <Field name="description" multiline floating rows={3} label="Project Description"
       component={TextBox} type="text" required />

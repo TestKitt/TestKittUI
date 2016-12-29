@@ -1,6 +1,6 @@
 @import "~react-toolbox/lib/colors";
 
-.test-case{
+.test_case{
   border-bottom: 1px solid #f3f3f3;
   cursor: pointer;
   &:first-child{
@@ -15,7 +15,7 @@
   &.fail{
     border-left: 6px solid $palette-red-500;
   }
-  &.no-data{
+  &.no_data{
     border-left: 6px solid lightgray;
   }
 }
