@@ -30,7 +30,6 @@ export default (store) => ({
   getChildRoutes (partialNextState, callback) {
     require.ensure([], function (require) {
       callback(null, [
-        // { path: 'create', component: require('./containers/CreateProjectViewContainer').default },
         { path: ':id', component: require('./containers/ProjectOverviewContainer').default }
       ])
     })
