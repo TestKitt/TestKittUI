@@ -2,53 +2,58 @@ import React, { PropTypes } from 'react'
 import TestCaseSidebar from '../TestCaseSidebar'
 import TestCaseView from '../TestCaseView'
 import { Tab, Tabs } from 'react-toolbox/lib/tabs'
+import Alert from 'components/Alert'
+import managesTabs from 'hocs/managesTabs'
 
-export const ProjectOverview = class extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      index: 0
-    }
-  }
-
-  handleTabChange = (index) => {
-    this.setState({ index })
-  }
-
-  render() {
-    return (
-      <div>
-        <Tabs index={this.state.index} onChange={this.handleTabChange} fixed>
-          <Tab label="Tests">
-            {
-              this.props.activeTestCase && <div>
-                <TestCaseView id={this.props.activeTestCase.id} name={this.props.activeTestCase.name} />
+let ProjectOverview = (props) => {
+  const { activeTestCase, handleTabChange, activeTab } = props
+  return (
+    <div>
+      <Tabs index={activeTab} onChange={handleTabChange} fixed>
+        <Tab label="Tests">
+          {
+              activeTestCase && <div>
+                <TestCaseView id={activeTestCase.id} name={activeTestCase.name} />
                 <TestCaseSidebar />
               </div>
             }
-            {
-              !this.props.activeTestCase && <div className="container">
+          {
+              !activeTestCase && <div className="container">
                 <TestCaseSidebar fullWidth />
               </div>
             }
-          </Tab>
-          <Tab label="Page Objects">
-          </Tab>
-          <Tab label="Workflows">
-          </Tab>
-          <Tab label="Details">
-          </Tab>
-        </Tabs>
-      </div>
-    )
-  }
+        </Tab>
+        <Tab label="Page Objects">
+          <Alert
+            title="Page Objects"
+            text="represent pages in in your application and expose elements
+            and properties which you can interact with in your test"
+            type="plain"
+          />
+        </Tab>
+        <Tab label="Workflows">
+          <Alert
+            title="Workflows"
+            text="are a collection of interactions of interactions with Page Objects
+            which are frequently re-used such as logging in"
+            type="plain"
+          />
+        </Tab>
+        <Tab label="Project Details" />
+      </Tabs>
+    </div>
+  )
 }
 
 ProjectOverview.propTypes = {
   activeTestCase: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string
-  })
+  }),
+  activeTab: PropTypes.number.isRequired,
+  handleTabChange: PropTypes.func.isRequired
 }
+
+ProjectOverview = managesTabs(ProjectOverview)
 
 export default ProjectOverview
