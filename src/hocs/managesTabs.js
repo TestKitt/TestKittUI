@@ -7,6 +7,7 @@ export const managesTabs = (WrappedComponent) => {
       this.state = {
         index: 0
       }
+      this.handleTabChange = this.handleTabChange.bind(this)
     }
 
     handleTabChange = (index) => {

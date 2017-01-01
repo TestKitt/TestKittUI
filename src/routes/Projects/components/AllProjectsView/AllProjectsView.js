@@ -3,31 +3,17 @@ import { ProjectList } from '../ProjectList'
 import CreateProjectForm from '../../forms/CreateProjectForm'
 import InterstitialMessage from 'components/InterstitialMessage'
 import LoadingMessage from 'components/LoadingMessage'
-import { Button } from 'react-toolbox/lib/button'
-import Dialog from 'react-toolbox/lib/dialog'
 
 export const AllProjectsView = (props) => {
-  const { projects, showForm, closeForm, isAddProjectFormShown,
-    fetching, creating, performSubmit, handleSubmit } = props
+  const { projects, fetching } = props
+
   if (fetching) {
     return <LoadingMessage message="Loading projects..." />
   }
 
   return (
     <div className="container">
-      <Button icon="add" onClick={showForm} label="Add New Project" flat primary />
-      <Dialog
-        actions={[
-          { label: 'Cancel', onClick: closeForm, disabled: creating },
-          { label: 'Save', onClick: performSubmit, disabled: creating }
-        ]}
-        active={isAddProjectFormShown}
-        onEscKeyDown={closeForm}
-        onOverlayClick={closeForm}
-        title="Add a New Project"
-      >
-        <CreateProjectForm onSubmit={handleSubmit} />
-      </Dialog>
+      <CreateProjectForm />
       {
         projects.length > 0 && <ProjectList projects={projects} />
       }
@@ -44,13 +30,7 @@ export const AllProjectsView = (props) => {
 
 AllProjectsView.propTypes = {
   projects: PropTypes.array.isRequired,
-  isAddProjectFormShown: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  creating: PropTypes.bool.isRequired,
-  showForm: PropTypes.func.isRequired,
-  closeForm: PropTypes.func.isRequired,
-  performSubmit: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  fetching: PropTypes.bool.isRequired
 }
 
 AllProjectsView.defaultProps = {

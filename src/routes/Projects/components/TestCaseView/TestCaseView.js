@@ -3,7 +3,6 @@ import style from './TestCaseView.scss'
 import { Tab, Tabs } from 'react-toolbox/lib/tabs'
 import Canvas from '../../containers/CanvasContainer'
 import DataManager from '../../containers/DataManagerContainer'
-import TestCaseForm from '../../forms/TestCaseForm'
 import managesTabs from 'hocs/managesTabs'
 
 let TestCaseView = (props) => {
@@ -13,9 +12,7 @@ let TestCaseView = (props) => {
     <div className={style.test_case}>
       <h5>{id} {name}</h5>
       <Tabs index={activeTab} onChange={handleTabChange}>
-        <Tab label="Details">
-          <TestCaseForm />
-        </Tab>
+        <Tab label="Details" />
         <Tab label="Steps">
           <Canvas steps={steps} />
         </Tab>

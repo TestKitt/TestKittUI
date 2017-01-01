@@ -15,20 +15,26 @@ export default (store) => ({
 export default (store) => ({
   path : 'projects',
 
-  getIndexRoute (partialNextState, callback) {
+  getComponent (location, cb) {
     require.ensure([], function (require) {
       /*  Add the reducer to the store on key 'projects'  */
       const reducer = require('./modules/projects').default
       injectReducer(store, { key: 'projects', reducer })
 
-      callback(null, {
-        component: require('./containers/ProjectsViewContainer').default
-      })
+      cb(null, require('./containers/ProjectsLayout').default)
     }, 'projects')
   },
 
-  getChildRoutes (partialNextState, callback) {
+  getIndexRoute (partialNextState, callback) {
     require.ensure([], function (require) {
+      callback(null, {
+        component: require('./containers/ProjectsViewContainer').default
+      })
+    })
+  },
+
+  getChildRoutes (partialNextState, callback) {
+    require.ensure(['./containers/ProjectsViewContainer'], function (require) {
       callback(null, [
         { path: ':id', component: require('./containers/ProjectOverviewContainer').default }
       ])

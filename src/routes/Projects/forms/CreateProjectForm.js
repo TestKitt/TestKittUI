@@ -1,16 +1,39 @@
 import React, { PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form'
-import style from './CreateProjectForm.scss'
+import { connect } from 'react-redux'
+import { Field, reduxForm, submit } from 'redux-form'
+import { Button } from 'react-toolbox/lib/button'
+import Dialog from 'react-toolbox/lib/dialog'
 import { TextBox } from 'components/Form'
+import { showAddProjectForm, closeAddProjectForm, createProject } from '../modules/projects'
+import style from './CreateProjectForm.scss'
 
-let CreateProjectForm = (props) => (
-  <form onSubmit={props.handleSubmit} className={style.create_form}>
-    <Field name="name" label="Project Name" component={TextBox} type="text" required />
-    <Field name="description" multiline floating rows={3} label="Project Description"
-      component={TextBox} type="text" required />
-    <Field name="image_url" label="Project Image URL" required component={TextBox} type="text" />
-  </form>
-)
+let CreateProjectForm = (props) => {
+  const { showForm, closeForm, performSubmit, creating, isShown } = props
+
+  return (
+    <div>
+      <Button icon="add" onClick={showForm} label="Add New Project" flat primary />
+      <Dialog
+        actions={[
+          { label: 'Cancel', onClick: closeForm, disabled: creating },
+          { label: 'Save', onClick: performSubmit, disabled: creating }
+        ]}
+        active={isShown}
+        onEscKeyDown={closeForm}
+        onOverlayClick={closeForm}
+        title="Add a New Project"
+      >
+
+        <form className={style.create_form}>
+          <Field name="name" label="Project Name" component={TextBox} type="text" required />
+          <Field name="description" multiline floating rows={3} label="Project Description"
+            component={TextBox} type="text" required />
+          <Field name="image_url" label="Project Image URL" required component={TextBox} type="text" />
+        </form>
+      </Dialog>
+    </div>
+  )
+}
 
 const validate = values => {
   const errors = {}
@@ -42,7 +65,24 @@ CreateProjectForm = reduxForm({
 })(CreateProjectForm)
 
 CreateProjectForm.propTypes = {
-  handleSubmit: PropTypes.func
+  isShown: PropTypes.bool.isRequired,
+  creating: PropTypes.bool.isRequired,
+  showForm: PropTypes.func.isRequired,
+  closeForm: PropTypes.func.isRequired,
+  performSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
-export default CreateProjectForm
+const mapStateToProps = (state) => ({
+  creating: state.projects.creating,
+  isShown: state.projects.isAddProjectFormShown
+})
+
+const mapDispatchToProps = {
+  showForm : () => showAddProjectForm(),
+  closeForm : () => closeAddProjectForm(),
+  performSubmit: () => submit('createProject'),
+  onSubmit: (values) => createProject(values)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProjectForm)

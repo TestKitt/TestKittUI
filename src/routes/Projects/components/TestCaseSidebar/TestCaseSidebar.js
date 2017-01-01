@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { TestCaseList } from '../TestCaseList'
 import InterstitialMessage from 'components/InterstitialMessage'
-import { Button } from 'react-toolbox/lib/button'
+import TestCaseForm from '../../forms/TestCaseForm'
 import style from './TestCaseSidebar.scss'
 
 export const TestCaseSidebar = (props) => (
@@ -17,7 +17,7 @@ export const TestCaseSidebar = (props) => (
       />
     }
 
-    <Button className={style.button} icon="add" label="Add New Test Case" flat primary />
+    <TestCaseForm buttonClass={style.button} />
   </aside>
 )
 
