@@ -4,6 +4,7 @@ const testsController = require('./controllers/tests')
 module.exports = (app) => {
   // Project API routes
   app.get('/api/projects', projectsController.getAll)
+  app.get('/api/projects/:id', projectsController.findById)
   app.post('/api/projects', projectsController.create)
   app.patch('/api/projects/:id', projectsController.update)
   app.delete('/api/projects/:id', projectsController.delete)

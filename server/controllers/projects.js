@@ -1,7 +1,18 @@
-const Project = require('../models/Project')
+const Project = require('../models/Project').model
 
 exports.getAll = (req, res) => {
-  Project.find().exec().then((err, result) => res.send({ data: err }))
+  Project
+    .find({}, 'name description image_url updated_at comments')
+    .sort({ 'updated_at': -1 })
+    .exec()
+    .then((result, err) => res.send({ data: result }))
+}
+
+exports.findById = (req, res) => {
+  Project
+    .findById(req.params.id, 'name description image_url updated_at comments')
+    .exec()
+    .then((result, err) => res.send(result))
 }
 
 exports.create = (req, res) => {
@@ -40,5 +51,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-  res.send(req.query)
+  Project.findById(req.params.id).remove().then(() => {
+    res.send('success', 204)
+  })
 }

@@ -3,10 +3,22 @@ import TestCaseSidebar from '../TestCaseSidebar'
 import TestCaseView from '../TestCaseView'
 import { Tab, Tabs } from 'react-toolbox/lib/tabs'
 import Alert from 'components/Alert'
+import InterstitialMessage from 'components/InterstitialMessage'
 import managesTabs from 'hocs/managesTabs'
 
 let ProjectOverview = (props) => {
-  const { activeTestCase, handleTabChange, activeTab } = props
+  const { activeTestCase, handleTabChange, activeTab, project } = props
+
+  // TODO: Flip
+  if (project) {
+    return (
+      <InterstitialMessage
+        image="/broken.png"
+        message="Could not load project. Does it exist?"
+      />
+    )
+  }
+
   return (
     <div>
       <Tabs index={activeTab} onChange={handleTabChange} fixed>

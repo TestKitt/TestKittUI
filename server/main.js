@@ -5,11 +5,13 @@ const webpackConfig = require('../build/webpack.config')
 const config = require('../config')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
+const dotenv = require('dotenv')
 
 const app = express()
 const paths = config.utils_paths
 app.use(bodyParser.json())
 app.use(expressValidator())
+dotenv.load({ path: '.env' })
 
 // Load routes before setting the fallback for the frontend app
 const router = require('./routes')
