@@ -1,5 +1,6 @@
 const API = require('utils/API').default
 import { SubmissionError } from 'redux-form'
+import { browserHistory } from 'react-router'
 
 // ------------------------------------
 // Constants
@@ -10,8 +11,9 @@ export const LOAD_ALL_PROJECTS_ERROR = 'LOAD_ALL_PROJECTS_ERROR'
 export const CREATE_PROJECT_REQUEST = 'CREATE_PROJECT_REQUEST'
 export const CREATE_PROJECT_SUCCESS = 'CREATE_PROJECT_SUCCESS'
 export const CREATE_PROJECT_ERROR = 'CREATE_PROJECT_ERROR'
-export const SHOW_ADD_PROJECTS = 'SHOW_ADD_PROJECTS'
-export const CLOSE_ADD_PROJECTS = 'CLOSE_ADD_PROJECTS'
+export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST'
+export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'
+export const DELETE_PROJECT_ERROR = 'DELETE_PROJECT_ERROR'
 
 // ------------------------------------
 // Actions
@@ -34,10 +36,22 @@ export const createProject = (values) => {
     return API.post('/api/projects', values)
       .then((data) => {
         dispatch(createProjectSuccess(data))
-        dispatch(closeAddProjectForm())
       }, (err) => {
         dispatch(createProjectError(err))
         throw new SubmissionError(err)
+      })
+  }
+}
+
+export const deleteProject = (id) => {
+  return (dispatch, getState) => {
+    dispatch(deleteProjectRequest(id))
+    return API.remove(`/api/projects/${id}`, {})
+      .then((data) => {
+        dispatch(deleteProjectSuccess(id))
+        browserHistory.push('/projects')
+      }, (err) => {
+        dispatch(deleteProjectError(err))
       })
   }
 }
@@ -82,22 +96,29 @@ export function createProjectError (errors) {
   }
 }
 
-export function closeAddProjectForm () {
+export function deleteProjectRequest (id) {
   return {
-    type    : CLOSE_ADD_PROJECTS
+    type    : DELETE_PROJECT_REQUEST,
+    project : id
   }
 }
 
-export function showAddProjectForm () {
+export function deleteProjectSuccess (id) {
   return {
-    type    : SHOW_ADD_PROJECTS
+    type    : DELETE_PROJECT_SUCCESS,
+    project : id
+  }
+}
+
+export function deleteProjectError (errors) {
+  return {
+    type    : DELETE_PROJECT_ERROR,
+    errors
   }
 }
 
 export const actions = {
-  fetchProjects,
-  closeAddProjectForm,
-  showAddProjectForm
+  fetchProjects, createProject, deleteProject
 }
 
 // ------------------------------------
@@ -121,15 +142,19 @@ const ACTION_HANDLERS = {
       creating: false
     }
   },
-  [CREATE_PROJECT_ERROR] : (state, action) => { return { ...state, creating: false } },
-  [SHOW_ADD_PROJECTS] : (state, action) => { return { ...state, isAddProjectFormShown: true } },
-  [CLOSE_ADD_PROJECTS] : (state, action) => { return { ...state, isAddProjectFormShown: false } }
+  [DELETE_PROJECT_SUCCESS] : (state, action) => {
+    return {
+      ...state,
+      projects: state.projects.filter((project) => project._id !== action.project)
+    }
+  },
+  [CREATE_PROJECT_ERROR] : (state, action) => { return { ...state, creating: false } }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { isAddProjectFormShown: false, fetching: false, creating: false, projects: [] }
+const initialState = { fetching: false, creating: false, projects: [] }
 export default function projectsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

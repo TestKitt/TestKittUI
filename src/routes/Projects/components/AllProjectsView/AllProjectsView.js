@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { ProjectList } from '../ProjectList'
-import CreateProjectForm from '../../forms/CreateProjectForm'
+import { ProjectFormDialog } from '../../forms/ProjectForm'
 import InterstitialMessage from 'components/InterstitialMessage'
 import LoadingMessage from 'components/LoadingMessage'
 
@@ -13,7 +13,10 @@ export const AllProjectsView = (props) => {
 
   return (
     <div className="container">
-      <CreateProjectForm />
+      <ProjectFormDialog
+        buttonText="Add a Project"
+        title="Add a Project"
+      />
       {
         projects.length > 0 && <ProjectList projects={projects} />
       }

@@ -5,6 +5,7 @@ import { Tab, Tabs } from 'react-toolbox/lib/tabs'
 import Alert from 'components/Alert'
 import InterstitialMessage from 'components/InterstitialMessage'
 import managesTabs from 'hocs/managesTabs'
+import ProjectDetails from '../../containers/ProjectDetailsContainer'
 
 let ProjectOverview = (props) => {
   const { activeTestCase, handleTabChange, activeTab, project } = props
@@ -51,7 +52,9 @@ let ProjectOverview = (props) => {
             type="plain"
           />
         </Tab>
-        <Tab label="Project Details" />
+        <Tab label="Project Details">
+          <ProjectDetails/>
+        </Tab>
       </Tabs>
     </div>
   )
