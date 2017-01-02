@@ -35,6 +35,10 @@ export default (store) => ({
 
   getChildRoutes (partialNextState, callback) {
     require.ensure(['./containers/ProjectsViewContainer'], function (require) {
+
+      const reducer = require('./modules/tests').default
+      injectReducer(store, { key: 'tests', reducer })
+
       callback(null, [
         { path: ':id', component: require('./containers/ProjectOverviewContainer').default }
       ])

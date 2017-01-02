@@ -1,15 +1,76 @@
-exports.getAll = (req, res) => {
-  res.send(req.query)
+const Project = require('../models/Project').model
+const Test = require('../models/Test').model
+
+exports.getAllForProject = (req, res) => {
+  Test
+    .find({ project: req.params.projectId }, 'name description updated_at')
+    .sort({ 'created_at': 1 })
+    .exec()
+    .then((result, err) => res.send({ data: result }))
+}
+
+exports.findForProjectById = (req, res) => {
+  Test
+    .findById(req.params.id, 'name description updated_at')
+    .exec()
+    .then((result, err) => res.send(result))
 }
 
 exports.create = (req, res) => {
-  res.send(req.query)
+  // Validate the request
+  req.checkBody('name', 'Invalid name').notEmpty()
+  req.checkBody('description', 'Invalid description').notEmpty()
+
+  req.getValidationResult().then((result) => {
+    if (!result.isEmpty()) {
+      let errors = result.mapped()
+      Object.keys(errors).forEach((key) => {
+        errors[key] = errors[key].msg
+      })
+      res.status(400).json(errors)
+    } else {
+      console.log(req.params)
+
+      Project.findById(req.params.projectId, 'name description image_url updated_at').then((project) => {
+        let test = new Test({
+          name: req.body.name,
+          description: req.body.description,
+          _project: project._id
+        })
+
+        // Save the object
+        test.save().then((data) => {
+          project.tests.push(test)
+          project.save()
+          res.json(data)
+        }).catch((err) => {
+          console.log(err)
+          res.status(400).send('There was an error saving the test')
+        })
+      })
+    }
+  })
 }
 
 exports.update = (req, res) => {
-  res.send(req.query)
+  Test.findById(req.params.id).then((project) => {
+    ['name', 'description'].forEach((key) => {
+      if (req.body[key]){
+        project[key] = req.body[key]
+      }
+    })
+
+    project.save().then((data) => {
+      res.json(data)
+    }).catch((err) => {
+      console.log(err)
+      res.status(400).send('There was an error saving the project')
+    })
+  })
 }
 
 exports.delete = (req, res) => {
-  res.send(req.query)
+  Test.findById(req.params.id).remove().then(() => {
+    res.status(204).send('success')
+  })
 }

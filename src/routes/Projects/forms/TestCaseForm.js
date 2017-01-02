@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, isSubmitting } from 'redux-form'
 import { Button } from 'react-toolbox/lib/button'
 import { TextBox } from 'components/Form'
 import dialogForm from 'hocs/dialogForm'
-import { createProject } from '../modules/projects'
+import { saveTest } from '../modules/tests'
 import style from './TestCaseForm.scss'
 
 const formKey = 'testCaseForm'
@@ -43,6 +43,7 @@ TestCaseForm = reduxForm({
 })(TestCaseForm)
 
 TestCaseForm.propTypes = {
+  projectId: PropTypes.string.isRequired,
   showSubmit: PropTypes.bool.isRequired,
   creating: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired
@@ -53,11 +54,13 @@ TestCaseForm.defaultProps = {
 }
 
 const mapStateToProps = (state) => ({
-  creating: state.projects.creating,
+  creating: isSubmitting(formKey)()
 })
 
-const mapDispatchToProps = {
-  onSubmit: (values) => createProject(values)
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onSubmit: (values) => dispatch(saveTest(values, props.projectId))
+  }
 }
 
 TestCaseForm = connect(mapStateToProps, mapDispatchToProps)(TestCaseForm)

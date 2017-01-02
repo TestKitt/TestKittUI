@@ -5,7 +5,7 @@ const projectSchema = new Schema({
   name: String,
   description: String,
   image_url: String,
-  test_cases : [{ type: Schema.Types.ObjectId, ref: 'TestCase' }]
+  tests : [{ type: Schema.Types.ObjectId, ref: 'Test' }]
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 
 module.exports = {

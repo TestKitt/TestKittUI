@@ -10,7 +10,8 @@ module.exports = (app) => {
   app.delete('/api/projects/:id', projectsController.delete)
 
   // Tests API routes
-  app.get('/api/projects/:projectId/tests', testsController.getAll)
+  app.get('/api/projects/:projectId/tests', testsController.getAllForProject)
+  app.get('/api/projects/:projectId/tests/:id', testsController.findForProjectById)
   app.post('/api/projects/:projectId/tests', testsController.create)
   app.patch('/api/projects/:projectId/tests/:id', testsController.update)
   app.delete('/api/projects/:id/tests/:id', testsController.delete)

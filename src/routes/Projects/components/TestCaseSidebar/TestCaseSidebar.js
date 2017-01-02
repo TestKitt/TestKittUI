@@ -21,6 +21,7 @@ export const TestCaseSidebar = (props) => (
       buttonClass={style.button}
       buttonText="Add New Test Case"
       title="Add a New Test Case"
+      projectId="586a9d66656da4cc560600b6"
     />
   </aside>
 )

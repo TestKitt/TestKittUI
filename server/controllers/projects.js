@@ -2,7 +2,7 @@ const Project = require('../models/Project').model
 
 exports.getAll = (req, res) => {
   Project
-    .find({}, 'name description image_url updated_at comments')
+    .find({}, 'name description image_url updated_at')
     .sort({ 'updated_at': -1 })
     .exec()
     .then((result, err) => res.send({ data: result }))
@@ -10,7 +10,7 @@ exports.getAll = (req, res) => {
 
 exports.findById = (req, res) => {
   Project
-    .findById(req.params.id, 'name description image_url updated_at comments')
+    .findById(req.params.id, 'name description image_url updated_at')
     .exec()
     .then((result, err) => res.send(result))
 }
@@ -47,9 +47,7 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  Project.findById(req.params.id, (err, project) => {
-    if (err) return handleError(err);
-
+  Project.findById(req.params.id).then((project) => {
     ['name', 'description', 'image_url'].forEach((key) => {
       if (req.body[key]){
         project[key] = req.body[key]
@@ -62,11 +60,11 @@ exports.update = (req, res) => {
       console.log(err)
       res.status(400).send('There was an error saving the project')
     })
-  });
+  })
 }
 
 exports.delete = (req, res) => {
   Project.findById(req.params.id).remove().then(() => {
-    res.send('success', 204)
+    res.status(204).send('success')
   })
 }

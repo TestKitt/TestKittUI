@@ -150,7 +150,6 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOAD_ALL_PROJECTS_REQUEST] : (state, action) => { return { ...state, fetching: true } },
-  [SAVE_PROJECT_REQUEST] : (state, action) => { return { ...state, creating: true } },
   [LOAD_ALL_PROJECTS_SUCCESS] : (state, action) => {
     return {
       ...state,
