@@ -47,7 +47,22 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  res.send(req.query)
+  Project.findById(req.params.id, (err, project) => {
+    if (err) return handleError(err);
+
+    ['name', 'description', 'image_url'].forEach((key) => {
+      if (req.body[key]){
+        project[key] = req.body[key]
+      }
+    })
+
+    project.save().then((data) => {
+      res.json(data)
+    }).catch((err) => {
+      console.log(err)
+      res.status(400).send('There was an error saving the project')
+    })
+  });
 }
 
 exports.delete = (req, res) => {

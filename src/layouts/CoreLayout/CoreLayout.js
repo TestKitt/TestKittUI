@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../../components/Header'
+import Notification from '../../containers/NotificationContainer'
 
 export const CoreLayout = ({ children }) => (
   <div>
@@ -7,6 +8,7 @@ export const CoreLayout = ({ children }) => (
     <div>
       {children}
     </div>
+    <Notification />
   </div>
 )
 

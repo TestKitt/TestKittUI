@@ -19,4 +19,6 @@ Notification.propTypes = {
   isShown: PropTypes.bool.isRequired
 }
 
+Notification.defaultProps = {}
+
 export default Notification

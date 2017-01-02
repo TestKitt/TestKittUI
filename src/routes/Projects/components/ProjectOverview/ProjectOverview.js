@@ -10,8 +10,7 @@ import ProjectDetails from '../../containers/ProjectDetailsContainer'
 let ProjectOverview = (props) => {
   const { activeTestCase, handleTabChange, activeTab, project } = props
 
-  // TODO: Flip
-  if (project) {
+  if (!project) {
     return (
       <InterstitialMessage
         image="/broken.png"
@@ -26,7 +25,10 @@ let ProjectOverview = (props) => {
         <Tab label="Tests">
           {
               activeTestCase && <div>
-                <TestCaseView id={activeTestCase.id} name={activeTestCase.name} />
+                <TestCaseView
+                  id={activeTestCase.id}
+                  name={activeTestCase.name}
+                />
                 <TestCaseSidebar />
               </div>
             }
@@ -53,7 +55,12 @@ let ProjectOverview = (props) => {
           />
         </Tab>
         <Tab label="Project Details">
-          <ProjectDetails/>
+          <ProjectDetails
+            id={props.project._id}
+            name={props.project.name}
+            description={props.project.description}
+            imageUrl={props.project.image_url}
+          />
         </Tab>
       </Tabs>
     </div>
@@ -65,6 +72,12 @@ ProjectOverview.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   }),
+  project: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    image_url: PropTypes.string
+  }).isRequired,
   activeTab: PropTypes.number.isRequired,
   handleTabChange: PropTypes.func.isRequired
 }

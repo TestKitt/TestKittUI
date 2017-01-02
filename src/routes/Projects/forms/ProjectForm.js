@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, isSubmitting } from 'redux-form'
 import { Button } from 'react-toolbox/lib/button'
 import { TextBox } from 'components/Form'
 import dialogForm from 'hocs/dialogForm'
-import { createProject } from '../modules/projects'
+import { saveProject } from '../modules/projects'
 import style from './ProjectForm.scss'
 
 const formKey = 'projectForm'
@@ -16,7 +16,7 @@ let ProjectForm = ({ handleSubmit, showSubmit }) => (
            component={TextBox} type="text" required />
     <Field name="image_url" label="Project Image URL" required component={TextBox} type="text" />
     {
-      showSubmit && <Button icon="save" type="submit" label="Add New Project" raised primary />
+      showSubmit && <Button icon="save" type="submit" label="Save" raised primary />
     }
   </form>
 )
@@ -60,12 +60,26 @@ ProjectForm.defaultProps = {
   showSubmit: true
 }
 
-const mapStateToProps = (state) => ({
-  creating: state.projects.creating,
-})
+const mapStateToProps = (state, ownProps) => {
+  const props = {
+    creating: isSubmitting(formKey)(),
+  }
 
-const mapDispatchToProps = {
-  onSubmit: (values) => createProject(values)
+  if (ownProps.id){
+    props.initialValues = {
+      name: ownProps.name,
+      description: ownProps.description,
+      image_url: ownProps.imageUrl
+    }
+  }
+
+  return props
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onSubmit: (values) => dispatch(saveProject(values, ownProps.id ? ownProps.id : null))
+  }
 }
 
 ProjectForm = connect(mapStateToProps, mapDispatchToProps)(ProjectForm)

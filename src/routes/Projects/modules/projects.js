@@ -1,6 +1,7 @@
 const API = require('utils/API').default
 import { SubmissionError } from 'redux-form'
 import { browserHistory } from 'react-router'
+import { showNotification } from 'store/notifications'
 
 // ------------------------------------
 // Constants
@@ -8,9 +9,10 @@ import { browserHistory } from 'react-router'
 export const LOAD_ALL_PROJECTS_REQUEST = 'LOAD_ALL_PROJECTS_REQUEST'
 export const LOAD_ALL_PROJECTS_SUCCESS = 'LOAD_ALL_PROJECTS_SUCCESS'
 export const LOAD_ALL_PROJECTS_ERROR = 'LOAD_ALL_PROJECTS_ERROR'
-export const CREATE_PROJECT_REQUEST = 'CREATE_PROJECT_REQUEST'
+export const SAVE_PROJECT_REQUEST = 'SAVE_PROJECT_REQUEST'
 export const CREATE_PROJECT_SUCCESS = 'CREATE_PROJECT_SUCCESS'
-export const CREATE_PROJECT_ERROR = 'CREATE_PROJECT_ERROR'
+export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'
+export const SAVE_PROJECT_ERROR = 'SAVE_PROJECT_ERROR'
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST'
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'
 export const DELETE_PROJECT_ERROR = 'DELETE_PROJECT_ERROR'
@@ -30,14 +32,26 @@ export const fetchProjects = () => {
   }
 }
 
-export const createProject = (values) => {
+export const saveProject = (values, id) => {
   return (dispatch, getState) => {
-    dispatch(createProjectRequest())
+    dispatch(saveProjectRequest(values, id))
+    if (id){
+      return API.patch(`/api/projects/${id}`, values)
+        .then((data) => {
+          dispatch(updateProjectSuccess(data, id))
+          dispatch(showNotification('Project updated successfully'))
+        }, (err) => {
+          dispatch(saveProjectError(err))
+          throw new SubmissionError(err)
+        })
+    }
+
     return API.post('/api/projects', values)
       .then((data) => {
         dispatch(createProjectSuccess(data))
+        dispatch(showNotification('Project saved successfully!'))
       }, (err) => {
-        dispatch(createProjectError(err))
+        dispatch(saveProjectError(err))
         throw new SubmissionError(err)
       })
   }
@@ -49,6 +63,7 @@ export const deleteProject = (id) => {
     return API.remove(`/api/projects/${id}`, {})
       .then((data) => {
         dispatch(deleteProjectSuccess(id))
+        dispatch(showNotification('Project deleted successfully'))
         browserHistory.push('/projects')
       }, (err) => {
         dispatch(deleteProjectError(err))
@@ -75,10 +90,19 @@ export function loadProjectsError () {
   }
 }
 
-export function createProjectRequest (data) {
+export function saveProjectRequest (data, id) {
   return {
-    type    : CREATE_PROJECT_REQUEST,
-    project : data
+    type    : SAVE_PROJECT_REQUEST,
+    project : data,
+    id
+  }
+}
+
+export function updateProjectSuccess (data, id) {
+  return {
+    type    : UPDATE_PROJECT_SUCCESS,
+    project : data,
+    id
   }
 }
 
@@ -89,9 +113,9 @@ export function createProjectSuccess (data) {
   }
 }
 
-export function createProjectError (errors) {
+export function saveProjectError (errors) {
   return {
-    type    : CREATE_PROJECT_ERROR,
+    type    : SAVE_PROJECT_ERROR,
     errors
   }
 }
@@ -118,7 +142,7 @@ export function deleteProjectError (errors) {
 }
 
 export const actions = {
-  fetchProjects, createProject, deleteProject
+  fetchProjects, saveProject, deleteProject
 }
 
 // ------------------------------------
@@ -126,7 +150,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOAD_ALL_PROJECTS_REQUEST] : (state, action) => { return { ...state, fetching: true } },
-  [CREATE_PROJECT_REQUEST] : (state, action) => { return { ...state, creating: true } },
+  [SAVE_PROJECT_REQUEST] : (state, action) => { return { ...state, creating: true } },
   [LOAD_ALL_PROJECTS_SUCCESS] : (state, action) => {
     return {
       ...state,
@@ -138,8 +162,19 @@ const ACTION_HANDLERS = {
   [CREATE_PROJECT_SUCCESS] : (state, action) => {
     return {
       ...state,
-      projects: state.projects.concat(action.project),
-      creating: false
+      projects: state.projects.concat(action.project)
+    }
+  },
+  [UPDATE_PROJECT_SUCCESS] : (state, action) => {
+    return {
+      ...state,
+      projects: state.projects.map((project) => {
+        if (project._id == action.id){
+          return action.project
+        }
+
+        return project
+      })
     }
   },
   [DELETE_PROJECT_SUCCESS] : (state, action) => {
@@ -148,13 +183,13 @@ const ACTION_HANDLERS = {
       projects: state.projects.filter((project) => project._id !== action.project)
     }
   },
-  [CREATE_PROJECT_ERROR] : (state, action) => { return { ...state, creating: false } }
+  [SAVE_PROJECT_ERROR] : (state, action) => { return { ...state } }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { fetching: false, creating: false, projects: [] }
+const initialState = { fetching: false, projects: [] }
 export default function projectsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

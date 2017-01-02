@@ -4,7 +4,8 @@ import ProjectOverview from '../components/ProjectOverview'
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
+  project: state.projects.projects.find((project) => project._id === props.params.id)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectOverview)

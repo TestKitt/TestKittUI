@@ -32,6 +32,22 @@ export default {
         })
     })
   },
+  patch: (url, payload) => {
+    return new Promise((resolve, reject) => {
+      request
+        .patch(url)
+        .set('Accept', 'application/json')
+        .set('Content-Type: application/json')
+        .send(payload)
+        .end(function (err, res) {
+          if (err || !res.ok) {
+            reject(res.body)
+          } else {
+            resolve(res.body)
+          }
+        })
+    })
+  },
   remove: (url, payload) => {
     return new Promise((resolve, reject) => {
       request
