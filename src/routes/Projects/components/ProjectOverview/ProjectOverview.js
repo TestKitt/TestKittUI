@@ -8,7 +8,7 @@ import managesTabs from 'hocs/managesTabs'
 import ProjectDetails from '../../containers/ProjectDetailsContainer'
 
 let ProjectOverview = (props) => {
-  const { activeTestCase, handleTabChange, activeTab, project } = props
+  const { activeTestCase, handleTabChange, activeTab, project, testCases } = props
 
   if (!project) {
     return (
@@ -24,17 +24,19 @@ let ProjectOverview = (props) => {
       <Tabs index={activeTab} onChange={handleTabChange} fixed>
         <Tab label="Tests">
           {
-              activeTestCase && <div>
-                <TestCaseView
-                  id={activeTestCase.id}
-                  name={activeTestCase.name}
+              testCases.length > 0  && <div>
+                <TestCaseView/>
+                <TestCaseSidebar
+                  testCases={testCases}
                 />
-                <TestCaseSidebar />
               </div>
             }
           {
-              !activeTestCase && <div className="container">
-                <TestCaseSidebar fullWidth />
+              testCases.length === 0 && <div className="container">
+                <TestCaseSidebar
+                  testCases={testCases}
+                  fullWidth
+                />
               </div>
             }
         </Tab>
@@ -72,6 +74,7 @@ ProjectOverview.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   }),
+  testCases: PropTypes.array,
   project: PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string,
@@ -80,6 +83,10 @@ ProjectOverview.propTypes = {
   }).isRequired,
   activeTab: PropTypes.number.isRequired,
   handleTabChange: PropTypes.func.isRequired
+}
+
+ProjectOverview.defaultProps = {
+  testCases: []
 }
 
 ProjectOverview = managesTabs(ProjectOverview)

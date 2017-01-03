@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const testSchema = new Schema({
   name: String,
   description: String,
-  _project: { type: Number, ref: 'Project' }
+  _project: { type: Schema.Types.ObjectId, ref: 'Project' }
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 
 module.exports = {

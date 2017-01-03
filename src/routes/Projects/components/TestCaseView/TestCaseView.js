@@ -6,13 +6,16 @@ import DataManager from '../../containers/DataManagerContainer'
 import managesTabs from 'hocs/managesTabs'
 
 let TestCaseView = (props) => {
-  const { id, name, steps, runHistory, handleTabChange, activeTab } = props
-
+  const { id, name, description, steps, runHistory, handleTabChange, activeTab } = props
   return (
     <div className={style.test_case}>
       <h5>{id} {name}</h5>
-      <Tabs index={activeTab} onChange={handleTabChange}>
-        <Tab label="Details" />
+      <Tabs index={activeTab} fixed={false} onChange={handleTabChange}>
+        <Tab label="Details">
+          <p>{id}</p>
+          <p>{name}</p>
+          <p>{description}</p>
+        </Tab>
         <Tab label="Steps">
           <Canvas steps={steps} />
         </Tab>

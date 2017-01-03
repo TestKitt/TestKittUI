@@ -25,7 +25,7 @@ export const fetchTests = (projectId) => {
     dispatch(loadAllTestsRequest())
     return API.get(`/api/projects/${projectId}/tests`)
       .then((data) => {
-        dispatch(loadTestsSuccess(data.data))
+        dispatch(loadTestsSuccess(data.data, projectId))
       }, (err) => {
         dispatch(loadTestsError(err))
       })
@@ -48,7 +48,7 @@ export const saveTest = (values, projectId, id) => {
 
     return API.post(`/api/projects/${projectId}/tests`, values)
       .then((data) => {
-        dispatch(createTestSuccess(data))
+        dispatch(createTestSuccess(data, projectId))
         dispatch(showNotification('Test saved successfully!'))
       }, (err) => {
         dispatch(saveTestError(err))
@@ -77,10 +77,11 @@ export function loadAllTestsRequest () {
   }
 }
 
-export function loadTestsSuccess (data) {
+export function loadTestsSuccess (data, projectId) {
   return {
     type    : LOAD_ALL_TESTS_SUCCESS,
-    tests : data
+    tests : data,
+    projectId
   }
 }
 
@@ -166,11 +167,14 @@ const ACTION_HANDLERS = {
   },
   [LOAD_ALL_TESTS_ERROR] : (state, action) => { return { ...state, fetching: false } },
   [CREATE_TEST_SUCCESS] : (state, action) => {
+    let { projectId, test } = action
     return {
       ...state,
       testsByProjectId: {
         ...state.testsByProjectId,
-        [action.projectId]: action.test
+        [projectId]: state.testsByProjectId[projectId] ?
+          state.testsByProjectId[projectId].concat(test) :
+          [test]
       }
     }
   },

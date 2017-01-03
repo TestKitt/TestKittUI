@@ -50,6 +50,7 @@ let dialogForm = (WrappedForm, formKey) => {
             title={this.props.title}
           >
             <WrappedForm
+              {...this.props}
               showSubmit={false}
             />
           </Dialog>

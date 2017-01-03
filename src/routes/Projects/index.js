@@ -1,5 +1,6 @@
 import { injectReducer } from '../../store/reducers'
 import { fetchProjects } from './modules/projects'
+import { fetchTests } from './modules/tests'
 
 /* Sync route definition
 export default (store) => ({
@@ -34,13 +35,20 @@ export default (store) => ({
   },
 
   getChildRoutes (partialNextState, callback) {
+    // TODO: Refactor into fractal route
     require.ensure(['./containers/ProjectsViewContainer'], function (require) {
 
       const reducer = require('./modules/tests').default
       injectReducer(store, { key: 'tests', reducer })
 
       callback(null, [
-        { path: ':id', component: require('./containers/ProjectOverviewContainer').default }
+        {
+          path: ':id',
+          component: require('./containers/ProjectOverviewContainer').default,
+          onEnter (nextState, replace) {
+            store.dispatch(fetchTests(nextState.params.id))
+          }
+        }
       ])
     })
   },

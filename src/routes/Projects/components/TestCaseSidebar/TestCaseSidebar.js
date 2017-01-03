@@ -7,7 +7,7 @@ import style from './TestCaseSidebar.scss'
 export const TestCaseSidebar = (props) => (
   <aside className={`${style.sidebar} ${props.fullWidth ? style.full_width : null}`} >
     {
-      props.testCases.length > 0 && <TestCaseList />
+      props.testCases.length > 0 && <TestCaseList testCases={props.testCases} />
     }
 
     {

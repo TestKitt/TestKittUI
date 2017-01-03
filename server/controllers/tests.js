@@ -3,7 +3,7 @@ const Test = require('../models/Test').model
 
 exports.getAllForProject = (req, res) => {
   Test
-    .find({ project: req.params.projectId }, 'name description updated_at')
+    .find({ _project: req.params.projectId }, 'name description steps data updated_at created_at')
     .sort({ 'created_at': 1 })
     .exec()
     .then((result, err) => res.send({ data: result }))
@@ -29,8 +29,6 @@ exports.create = (req, res) => {
       })
       res.status(400).json(errors)
     } else {
-      console.log(req.params)
-
       Project.findById(req.params.projectId, 'name description image_url updated_at').then((project) => {
         let test = new Test({
           name: req.body.name,
@@ -40,7 +38,9 @@ exports.create = (req, res) => {
 
         // Save the object
         test.save().then((data) => {
-          project.tests.push(test)
+          project.tests = project.tests ?
+            project.tests.concat(test) :
+            [test]
           project.save()
           res.json(data)
         }).catch((err) => {

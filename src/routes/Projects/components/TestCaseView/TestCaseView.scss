@@ -1,10 +1,9 @@
 .test_case{
   width: 100%;
-  padding: 15px;
+  padding: 5px;
   @media(min-width: 992px){
     width: 75%;
     float: left;
     margin-left: 25%;
-    padding: 30px;
   }
 }
