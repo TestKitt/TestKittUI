@@ -179,6 +179,7 @@ const ACTION_HANDLERS = {
     }
   },
   [UPDATE_TEST_SUCCESS] : (state, action) => {
+    // TODO: Do we need the projectId or should we do a more expensive find? Probably want the projectId
     return {
       ...state
     }

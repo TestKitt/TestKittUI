@@ -4,6 +4,8 @@ import InterstitialMessage from 'components/InterstitialMessage'
 import { TestCaseFormDialog } from '../../forms/TestCaseForm'
 import style from './TestCaseSidebar.scss'
 
+// TODO: Active test dispatch
+// TODO: Tests cases as props or derive from projectId in container or HoC?
 export const TestCaseSidebar = (props) => (
   <aside className={`${style.sidebar} ${props.fullWidth ? style.full_width : null}`} >
     {

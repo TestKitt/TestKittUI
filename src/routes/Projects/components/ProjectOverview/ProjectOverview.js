@@ -7,6 +7,8 @@ import InterstitialMessage from 'components/InterstitialMessage'
 import managesTabs from 'hocs/managesTabs'
 import ProjectDetails from '../../containers/ProjectDetailsContainer'
 
+// TODO: Think about the active test case and whether it belongs here. Probably does
+// Should testcases be passed to sidebar? Probably
 let ProjectOverview = (props) => {
   const { activeTestCase, handleTabChange, activeTab, project, testCases } = props
 
