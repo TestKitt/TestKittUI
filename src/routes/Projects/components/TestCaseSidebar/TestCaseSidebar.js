@@ -23,12 +23,13 @@ export const TestCaseSidebar = (props) => (
       buttonClass={style.button}
       buttonText="Add New Test Case"
       title="Add a New Test Case"
-      projectId="586a9d66656da4cc560600b6"
+      projectId={props.projectId}
     />
   </aside>
 )
 
 TestCaseSidebar.propTypes = {
+  projectId: PropTypes.string.isRequired,
   testCases: PropTypes.array.isRequired,
   fullWidth: PropTypes.bool.isRequired
 }

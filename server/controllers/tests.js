@@ -30,23 +30,27 @@ exports.create = (req, res) => {
       res.status(400).json(errors)
     } else {
       Project.findById(req.params.projectId, 'name description image_url updated_at').then((project) => {
-        let test = new Test({
-          name: req.body.name,
-          description: req.body.description,
-          _project: project._id
-        })
+        if (project) {
+          let test = new Test({
+            name: req.body.name,
+            description: req.body.description,
+            _project: project._id
+          })
 
-        // Save the object
-        test.save().then((data) => {
-          project.tests = project.tests ?
-            project.tests.concat(test) :
-            [test]
-          project.save()
-          res.json(data)
-        }).catch((err) => {
-          console.log(err)
-          res.status(400).send('There was an error saving the test')
-        })
+          // Save the object
+          test.save().then((data) => {
+            project.tests = project.tests ?
+              project.tests.concat(test) :
+              [test]
+            project.save()
+            res.json(data)
+          }).catch((err) => {
+            console.log(err)
+            res.status(400).send('There was an error saving the test')
+          })
+        } else {
+          res.status(400).send('That project does not exist')
+        }
       })
     }
   })

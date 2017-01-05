@@ -29,6 +29,7 @@ let ProjectOverview = (props) => {
               testCases.length > 0  && <div>
                 <TestCaseView/>
                 <TestCaseSidebar
+                  projectId={project._id}
                   testCases={testCases}
                 />
               </div>
@@ -36,6 +37,7 @@ let ProjectOverview = (props) => {
           {
               testCases.length === 0 && <div className="container">
                 <TestCaseSidebar
+                  projectId={project._id}
                   testCases={testCases}
                   fullWidth
                 />
@@ -60,10 +62,10 @@ let ProjectOverview = (props) => {
         </Tab>
         <Tab label="Project Details">
           <ProjectDetails
-            id={props.project._id}
-            name={props.project.name}
-            description={props.project.description}
-            imageUrl={props.project.image_url}
+            id={project._id}
+            name={project.name}
+            description={project.description}
+            imageUrl={project.image_url}
           />
         </Tab>
       </Tabs>

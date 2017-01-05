@@ -11,7 +11,7 @@ export const ProjectDetails = ({ id, name, description, imageUrl, deleteProject 
         description={description}
         imageUrl={imageUrl}
       />
-      <Button raised label="Delete Project" onClick={() => deleteProject()} />
+      <Button className="btn-danger" raised accent label="Delete Project" onClick={() => deleteProject()} />
     </div>
   )
 }
