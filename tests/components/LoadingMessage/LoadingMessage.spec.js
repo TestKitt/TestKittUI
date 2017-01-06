@@ -1,27 +1,15 @@
 import React from 'react'
-import { Navigation } from 'components/Navigation/Navigation'
-import { IndexLink, Link } from 'react-router'
+import { LoadingMessage } from 'components/LoadingMessage/LoadingMessage'
 import { shallow } from 'enzyme'
-import style from 'components/Navigation/Navigation.scss'
 
 describe('(Component) LoadingMessage', () => {
   let _wrapper
 
   beforeEach(() => {
-    _wrapper = shallow(<Navigation />)
+    _wrapper = shallow(<LoadingMessage />)
   })
 
-  describe('Navigation links...', () => {
-    it('Should render a Link to Tests route', () => {
-      expect(_wrapper.contains(
-        <Link activeClassName={style['route-active']} to="/projects">Tests</Link>
-      )).to.be.true
-    })
+  describe('Loading Message...', () => {
 
-    it('Should render a Link to Settings route', () => {
-      expect(_wrapper.contains(
-        <Link activeClassName={style['route-active']} to="/settings">Settings</Link>
-      )).to.be.true
-    })
   })
 })

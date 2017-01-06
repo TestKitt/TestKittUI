@@ -3,7 +3,7 @@ import { ListItem } from 'react-toolbox/lib/list'
 import style from './TestCaseListItem.scss'
 
 export const TestCaseListItem = (props) => {
-  const { id, name, lastRunResult } = props
+  const { name, lastRunResult } = props
   return (
     <ListItem
       caption={`${name}`}

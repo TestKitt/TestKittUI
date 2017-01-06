@@ -11,15 +11,15 @@ describe('(Component) Navigation', () => {
     _wrapper = shallow(<Navigation />)
   })
 
-  it('Should render a Link to Tests route', () => {
+  it('Should render a Link to Projects route', () => {
     expect(_wrapper.contains(
-      <Link activeClassName={style['route-active']} to="/projects">Tests</Link>
+      <Link activeClassName={style.route_active} to="/settings">Settings</Link>
     )).to.be.true
   })
 
   it('Should render a Link to Settings route', () => {
     expect(_wrapper.contains(
-      <Link activeClassName={style['route-active']} to="/settings">Settings</Link>
+      <Link activeClassName={style.route_active} to="/settings">Settings</Link>
     )).to.be.true
   })
 })

@@ -35,7 +35,7 @@ export const fetchProjects = () => {
 export const saveProject = (values, id) => {
   return (dispatch, getState) => {
     dispatch(saveProjectRequest(values, id))
-    if (id){
+    if (id) {
       return API.patch(`/api/projects/${id}`, values)
         .then((data) => {
           dispatch(updateProjectSuccess(data, id))
@@ -168,7 +168,7 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       projects: state.projects.map((project) => {
-        if (project._id == action.id){
+        if (project._id === action.id) {
           return action.project
         }
 

@@ -49,7 +49,7 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   Project.findById(req.params.id).then((project) => {
     ['name', 'description', 'image_url'].forEach((key) => {
-      if (req.body[key]){
+      if (req.body[key]) {
         project[key] = req.body[key]
       }
     })

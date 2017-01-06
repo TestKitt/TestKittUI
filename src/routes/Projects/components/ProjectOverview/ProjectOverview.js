@@ -10,7 +10,7 @@ import ProjectDetails from '../../containers/ProjectDetailsContainer'
 // TODO: Think about the active test case and whether it belongs here. Probably does
 // Should testcases be passed to sidebar? Probably
 let ProjectOverview = (props) => {
-  const { activeTestCase, handleTabChange, activeTab, project, testCases } = props
+  const { handleTabChange, activeTab, project, testCases } = props
 
   if (!project) {
     return (
@@ -26,8 +26,8 @@ let ProjectOverview = (props) => {
       <Tabs index={activeTab} onChange={handleTabChange} fixed>
         <Tab label="Tests">
           {
-              testCases.length > 0  && <div>
-                <TestCaseView/>
+              testCases.length > 0 && <div>
+                <TestCaseView />
                 <TestCaseSidebar
                   projectId={project._id}
                   testCases={testCases}

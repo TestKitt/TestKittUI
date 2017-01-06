@@ -35,7 +35,7 @@ export const fetchTests = (projectId) => {
 export const saveTest = (values, projectId, id) => {
   return (dispatch, getState) => {
     dispatch(saveTestRequest(values, id))
-    if (id){
+    if (id) {
       return API.patch(`/api/projects/${projectId}/tests/${id}`, values)
         .then((data) => {
           dispatch(updateTestSuccess(data, id))
@@ -172,9 +172,9 @@ const ACTION_HANDLERS = {
       ...state,
       testsByProjectId: {
         ...state.testsByProjectId,
-        [projectId]: state.testsByProjectId[projectId] ?
-          state.testsByProjectId[projectId].concat(test) :
-          [test]
+        [projectId]: state.testsByProjectId[projectId]
+          ? state.testsByProjectId[projectId].concat(test)
+          : [test]
       }
     }
   },

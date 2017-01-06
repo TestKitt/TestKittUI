@@ -6,7 +6,7 @@ import { submit, hasSubmitSucceeded, hasSubmitFailed, isSubmitting, reset } from
 
 let dialogForm = (WrappedForm, formKey) => {
   let DialogForm = class extends React.Component {
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.state = {
         isShown: false
@@ -18,31 +18,31 @@ let dialogForm = (WrappedForm, formKey) => {
 
     componentDidUpdate = () => {
       if (this.props.hasSubmitSucceeded && this.state.isShown) {
-        this.setState({isShown: false})
+        this.setState({ isShown: false })
         this.props.reset()
       }
     }
 
     showForm = () => {
-      this.setState({isShown: true})
+      this.setState({ isShown: true })
     }
 
     closeForm = () => {
-      this.setState({isShown: false})
+      this.setState({ isShown: false })
     }
 
     handleSubmit = () => {
       this.props.performSubmit()
     }
 
-    render() {
+    render () {
       return (
         <div>
-          <Button icon={this.props.buttonIcon} onClick={this.showForm} label={this.props.buttonText} flat primary/>
+          <Button icon={this.props.buttonIcon} onClick={this.showForm} label={this.props.buttonText} flat primary />
           <Dialog
             actions={[
-              {label: this.props.cancelButtonText, onClick: this.closeForm, disabled: this.props.disabled},
-              {label: this.props.saveButtonText, onClick: this.handleSubmit, disabled: this.props.disabled}
+              { label: this.props.cancelButtonText, onClick: this.closeForm, disabled: this.props.disabled },
+              { label: this.props.saveButtonText, onClick: this.handleSubmit, disabled: this.props.disabled }
             ]}
             active={this.state.isShown}
             onEscKeyDown={this.closeForm}
@@ -64,6 +64,7 @@ let dialogForm = (WrappedForm, formKey) => {
     hasSubmitSucceeded: PropTypes.bool.isRequired,
     hasSubmitFailed: PropTypes.bool.isRequired,
     performSubmit: PropTypes.func.isRequired,
+    reset: PropTypes.func.isRequired,
     buttonText: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     buttonIcon: PropTypes.string.isRequired,

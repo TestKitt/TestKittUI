@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import ProjectForm  from '../../forms/ProjectForm'
+import ProjectForm from '../../forms/ProjectForm'
 import { Button } from 'react-toolbox/lib/button'
 
 export const ProjectDetails = ({ id, name, description, imageUrl, deleteProject }) => {

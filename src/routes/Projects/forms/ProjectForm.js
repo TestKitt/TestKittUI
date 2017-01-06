@@ -13,7 +13,7 @@ let ProjectForm = ({ handleSubmit, showSubmit }) => (
   <form onSubmit={handleSubmit} className={style.create_form}>
     <Field name="name" label="Project Name" component={TextBox} type="text" required />
     <Field name="description" multiline floating rows={3} label="Project Description"
-           component={TextBox} type="text" required />
+      component={TextBox} type="text" required />
     <Field name="image_url" label="Project Image URL" required component={TextBox} type="text" />
     {
       showSubmit && <Button icon="save" type="submit" label="Save" raised primary />
@@ -53,6 +53,7 @@ ProjectForm = reduxForm({
 ProjectForm.propTypes = {
   showSubmit: PropTypes.bool.isRequired,
   creating: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 
@@ -62,10 +63,10 @@ ProjectForm.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => {
   const props = {
-    creating: isSubmitting(formKey)(),
+    creating: isSubmitting(formKey)()
   }
 
-  if (ownProps.id){
+  if (ownProps.id) {
     props.initialValues = {
       name: ownProps.name,
       description: ownProps.description,

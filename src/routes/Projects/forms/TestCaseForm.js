@@ -13,7 +13,7 @@ let TestCaseForm = ({ handleSubmit, showSubmit }) => (
   <form onSubmit={handleSubmit} className={style.create_form}>
     <Field name="name" label="Test Case Name" component={TextBox} type="text" required />
     <Field name="description" multiline floating rows={3} label="Test Case Description"
-           component={TextBox} type="text" required />
+      component={TextBox} type="text" required />
     {
       showSubmit && <Button icon="save" type="submit" label="Add New Test Case" raised primary />
     }
@@ -46,6 +46,7 @@ TestCaseForm.propTypes = {
   projectId: PropTypes.string.isRequired,
   showSubmit: PropTypes.bool.isRequired,
   creating: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 

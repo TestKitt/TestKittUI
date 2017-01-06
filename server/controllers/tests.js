@@ -39,9 +39,9 @@ exports.create = (req, res) => {
 
           // Save the object
           test.save().then((data) => {
-            project.tests = project.tests ?
-              project.tests.concat(test) :
-              [test]
+            project.tests = project.tests
+              ? project.tests.concat(test)
+              : [test]
             project.save()
             res.json(data)
           }).catch((err) => {
@@ -59,7 +59,7 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   Test.findById(req.params.id).then((project) => {
     ['name', 'description'].forEach((key) => {
-      if (req.body[key]){
+      if (req.body[key]) {
         project[key] = req.body[key]
       }
     })

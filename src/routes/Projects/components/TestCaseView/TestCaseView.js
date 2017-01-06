@@ -38,6 +38,7 @@ TestCaseView.defaultProps = {
 TestCaseView.propTypes = {
   runHistory: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   steps: PropTypes.object,
   activeTab: PropTypes.number.isRequired,

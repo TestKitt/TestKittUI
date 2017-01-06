@@ -37,7 +37,6 @@ export default (store) => ({
   getChildRoutes (partialNextState, callback) {
     // TODO: Refactor into fractal route
     require.ensure(['./containers/ProjectsViewContainer'], function (require) {
-
       const reducer = require('./modules/tests').default
       injectReducer(store, { key: 'tests', reducer })
 
