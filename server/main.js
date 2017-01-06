@@ -6,12 +6,15 @@ const config = require('../config')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const dotenv = require('dotenv')
+const fs = require('fs-extra')
 
 const app = express()
 const paths = config.utils_paths
 app.use(bodyParser.json())
 app.use(expressValidator())
-dotenv.load({ path: '.env' })
+if (fs.existsSync('.env')){
+  dotenv.load({ path: '.env' })
+}
 
 // Load routes before setting the fallback for the frontend app
 const router = require('./routes')

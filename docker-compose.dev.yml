@@ -1,11 +1,13 @@
 version: '2'
 services:
   ui:
-    image: testkitt/testkittui:latest
+    build: .
     ports:
-      - 80:80
+      - "3001:80"
+    volumes:
+      - .:/usr/src/testkittui
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - PORT=80
       - MONGO_HOST=mongo
     depends_on:
